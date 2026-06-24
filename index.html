@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Hashir — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --void:   #070B14;
+    --deep:   #0D1525;
+    --panel:  #111D35;
+    --rim:    #1A2E50;
+    --aurora: #6EE7F7;
+    --spark:  #A78BFA;
+    --gold:   #F5C542;
+    --green:  #4ADE80;
+    --white:  #F0F4FF;
+    --muted:  #8DA0C4;
+  }
+
+  body {
+    background: var(--void);
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--white);
+    min-height: 100vh;
+    padding: 48px 20px 64px;
+  }
+
+  /* ── PAGE WRAPPER ── */
+  .cv-page {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ── BACKGROUND GLOW ── */
+  .cv-page::before {
+    content: '';
+    position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 600px; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 50% 50% at 15% 20%, rgba(167,139,250,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 45% 45% at 85% 10%, rgba(110,231,247,0.10) 0%, transparent 55%);
+  }
+
+  /* ── HEADER ── */
+  .cv-header {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 32px 36px;
+    background: var(--panel);
+    border: 1px solid var(--rim);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .cv-header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--aurora), var(--spark), var(--aurora));
+  }
+  /* circuit art */
+  .cv-header::after {
+    content: '';
+    position: absolute; top: -30px; right: -30px;
+    width: 180px; height: 180px;
+    background:
+      radial-gradient(ellipse 80% 80% at 80% 20%, rgba(167,139,250,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* avatar */
+  .header-avatar {
+    width: 90px; height: 90px; border-radius: 16px;
+    border: 2px solid rgba(110,231,247,0.3);
+    background: linear-gradient(135deg,rgba(110,231,247,0.08),rgba(167,139,250,0.08));
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; overflow: hidden;
+  }
+
+  .header-center { display: flex; flex-direction: column; gap: 6px; }
+  .header-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--aurora);
+  }
+  .header-name {
+    font-size: 36px; font-weight: 700;
+    color: var(--white); line-height: 1;
+    letter-spacing: -1px;
+  }
+  .header-name span { color: var(--aurora); }
+  .header-title {
+    font-size: 13px; font-weight: 500;
+    color: var(--spark); margin-top: 2px;
+  }
+  .header-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+  .htag {
+    font-family: 'Space Mono', monospace;
+    font-size: 7.5px; padding: 2px 9px; border-radius: 20px;
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .htag.a { background: rgba(110,231,247,0.08); border: 1px solid rgba(110,231,247,0.22); color: var(--aurora); }
+  .htag.s { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.22); color: var(--spark); }
+  .htag.g { background: rgba(245,197,66,0.08);  border: 1px solid rgba(245,197,66,0.22);  color: var(--gold); }
+
+  /* header stats */
+  .header-stats {
+    display: flex; flex-direction: column; gap: 10px;
+    align-items: flex-end; flex-shrink: 0;
+  }
+  .hstat { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+  .hstat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 20px; font-weight: 700; color: var(--gold); line-height: 1;
+  }
+  .hstat-lbl {
+    font-family: 'Space Mono', monospace;
+    font-size: 7px; color: var(--muted);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  /* ── TWO-COLUMN LAYOUT ── */
+  .cv-body {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  /* ── MAIN ── */
+  .main { display: flex; flex-direction: column; gap: 16px; }
+
+  /* ── CARD (shared) ── */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--rim);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--aurora), var(--spark));
+    border-radius: 3px 0 0 3px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px; font-weight: 700;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--aurora); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--rim), transparent);
+  }
+
+  /* contact items */
+  .contact-list { display: flex; flex-direction: column; gap: 9px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 9px; }
+  .c-icon {
+    font-size: 11px; width: 20px; height: 20px;
+    background: rgba(110,231,247,0.08);
+    border: 1px solid rgba(110,231,247,0.18);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .c-info { display: flex; flex-direction: column; gap: 1px; }
+  .c-lbl { font-family:'Space Mono',monospace; font-size:7px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); }
+  .c-val { font-size: 11px; font-weight: 500; color: var(--white); }
+  .c-val a { color: var(--aurora); text-decoration: none; }
+  .proj-url a { color: var(--aurora); text-decoration: none; }
+  .proj-url a:hover { text-decoration: underline; }
+
+  /* skills */
+  .skill-list { display: flex; flex-direction: column; gap: 10px; }
+  .skill-item { display: flex; flex-direction: column; gap: 4px; }
+  .skill-top { display: flex; justify-content: space-between; align-items: center; }
+  .skill-name { font-size: 11px; font-weight: 600; color: var(--white); }
+  .skill-pct  { font-family:'Space Mono',monospace; font-size:9px; color:var(--aurora); }
+  .skill-bar  { height: 4px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+  .skill-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,var(--aurora),var(--spark)); }
+
+  /* tools */
+  .tools-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tool-chip {
+    font-family:'Space Mono',monospace; font-size:8px; font-weight:700;
+    padding: 3px 10px; border-radius: 20px;
+    background: rgba(167,139,250,0.08);
+    border: 1px solid rgba(167,139,250,0.22);
+    color: var(--spark);
+    letter-spacing: 0.05em;
+  }
+
+  /* languages */
+  .lang-list { display: flex; flex-direction: column; gap: 8px; }
+  .lang-item { display: flex; justify-content: space-between; align-items: center; }
+  .lang-name { font-size: 11px; font-weight: 600; color: var(--white); }
+  .lang-level {
+    font-family:'Space Mono',monospace; font-size:8px;
+    padding: 2px 8px; border-radius: 20px;
+    background: rgba(110,231,247,0.08);
+    border: 1px solid rgba(110,231,247,0.18);
+    color: var(--aurora);
+  }
+
+  /* about */
+  .about-text {
+    font-size: 12.5px; line-height: 1.7;
+    color: var(--muted); font-weight: 400;
+  }
+  .about-text strong { color: var(--white); font-weight: 600; }
+
+  /* experience */
+  .exp-list { display: flex; flex-direction: column; gap: 16px; }
+  .exp-item { position: relative; padding-left: 16px; }
+  .exp-item::before {
+    content: '';
+    position: absolute; left: 0; top: 6px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--aurora);
+    box-shadow: 0 0 8px rgba(110,231,247,0.5);
+  }
+  .exp-item::after {
+    content: '';
+    position: absolute; left: 2.5px; top: 14px; bottom: -16px;
+    width: 1px; background: var(--rim);
+  }
+  .exp-item:last-child::after { display: none; }
+  .exp-role { font-size: 13px; font-weight: 700; color: var(--white); }
+  .exp-company {
+    font-family:'Space Mono',monospace; font-size:9px;
+    color: var(--aurora); margin-top: 2px; letter-spacing: 0.05em;
+  }
+  .exp-desc { font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+
+  /* projects */
+  .proj-list { display: flex; flex-direction: column; gap: 12px; }
+  .proj-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--rim);
+    border-radius: 10px; padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 4px;
+    transition: border-color 0.2s;
+  }
+  .proj-item:hover { border-color: rgba(110,231,247,0.3); }
+  .proj-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .proj-name { font-size: 12px; font-weight: 700; color: var(--white); }
+  .proj-tag  {
+    font-family:'Space Mono',monospace; font-size:7.5px;
+    padding: 2px 8px; border-radius: 20px;
+    background: rgba(110,231,247,0.06);
+    border: 1px solid rgba(110,231,247,0.16);
+    color: var(--aurora); white-space: nowrap;
+  }
+  .proj-url  { font-family:'Space Mono',monospace; font-size:9px; color:var(--aurora); }
+  .proj-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+
+  /* education */
+  .edu-list { display: flex; flex-direction: column; gap: 12px; }
+  .edu-item { display: flex; gap: 12px; align-items: flex-start; }
+  .edu-dot {
+    width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+    background: linear-gradient(135deg, rgba(110,231,247,0.1), rgba(167,139,250,0.1));
+    border: 1px solid rgba(110,231,247,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+  .edu-info { display: flex; flex-direction: column; gap: 2px; }
+  .edu-level { font-size: 12px; font-weight: 700; color: var(--white); }
+  .edu-place { font-size: 10.5px; color: var(--muted); }
+  .edu-status {
+    font-family:'Space Mono',monospace; font-size:8px;
+    padding: 1px 7px; border-radius: 20px; display:inline-block; margin-top:2px;
+  }
+  .edu-status.done    { background:rgba(74,222,128,0.08); border:1px solid rgba(74,222,128,0.22); color:var(--green); }
+  .edu-status.prog    { background:rgba(245,197,66,0.08);  border:1px solid rgba(245,197,66,0.22);  color:var(--gold); }
+  .edu-status.awaited { background:rgba(167,139,250,0.08); border:1px solid rgba(167,139,250,0.22); color:var(--spark); }
+
+  /* cert */
+  .cert-item {
+    background: rgba(110,231,247,0.04);
+    border: 1px solid rgba(110,231,247,0.14);
+    border-radius: 10px; padding: 12px 14px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .cert-icon { font-size: 18px; flex-shrink: 0; }
+  .cert-info { display: flex; flex-direction: column; gap: 2px; }
+  .cert-name { font-size: 11.5px; font-weight: 600; color: var(--white); }
+  .cert-by   { font-size: 10px; color: var(--muted); }
+  .cert-date { font-family:'Space Mono',monospace; font-size:8px; color:var(--aurora); margin-top:2px; }
+
+  /* footer */
+  .cv-footer {
+    position: relative; z-index: 1;
+    margin-top: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+    background: var(--panel);
+    border: 1px solid var(--rim);
+    border-radius: 12px;
+  }
+  .footer-left { display: flex; align-items: center; gap: 10px; }
+  .footer-logo { display: flex; align-items: center; gap: 8px; }
+  .footer-name { font-family:'Space Mono',monospace; font-size:10px; font-weight:700; color:var(--aurora); letter-spacing:.1em; }
+  .footer-right { font-family:'Space Mono',monospace; font-size:8px; color:var(--muted); letter-spacing:.1em; text-align:right; }
+
+  @media print {
+    body { background: #070B14; padding: 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cv-page::before { display: none; }
+  }
+
+  @media (max-width: 700px) {
+    .cv-body { grid-template-columns: 1fr; }
+    .cv-header { grid-template-columns: auto 1fr; }
+    .header-stats { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="cv-page">
+
+  <!-- ══ HEADER ══ -->
+  <div class="cv-header">
+    <!-- Avatar -->
+    <div class="header-avatar">
+      <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+        <rect width="90" height="90" rx="16" fill="url(#hBg)"/>
+        <circle cx="45" cy="32" r="16" fill="url(#hSil)" opacity="0.85"/>
+        <path d="M10 82 C10 60 22 52 45 52 C68 52 80 60 80 82 Z" fill="url(#hSil)" opacity="0.85"/>
+        <defs>
+          <linearGradient id="hBg" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0D1525"/><stop offset="1" stop-color="#111D35"/>
+          </linearGradient>
+          <linearGradient id="hSil" x1="20" y1="20" x2="70" y2="82" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6EE7F7" stop-opacity="0.65"/><stop offset="1" stop-color="#A78BFA" stop-opacity="0.65"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Name & title -->
+    <div class="header-center">
+      <div class="header-eyebrow">∞ InfiniMind Academy · MHW Web Solutions</div>
+      <div class="header-name">Muhammad <span>Hashir</span></div>
+      <div class="header-title">Web Developer · Graphic Designer · Founder</div>
+      <div class="header-tags">
+        <span class="htag a">HTML/CSS/JS</span>
+        <span class="htag s">Bootstrap · jQuery</span>
+        <span class="htag g">Canva · Design</span>
+        <span class="htag a">Social Media Mktg</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="header-stats">
+      <div class="hstat">
+        <div class="hstat-num">51+</div>
+        <div class="hstat-lbl">Sites Delivered</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">40+</div>
+        <div class="hstat-lbl">Clients</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">99+</div>
+        <div class="hstat-lbl">In Pipeline</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="cv-body">
+
+    <!-- ── SIDEBAR ── -->
+    <div class="sidebar">
+
+      <!-- Contact -->
+      <div class="card">
+        <div class="section-label">Contact</div>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="c-icon">📞</div>
+            <div class="c-info">
+              <span class="c-lbl">Phone</span>
+              <span class="c-val">+92 332 248 3233</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">✉️</div>
+            <div class="c-info">
+              <span class="c-lbl">Email</span>
+              <span class="c-val" style="font-size:10px;">muhammadhashir1062009@gmail.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">📍</div>
+            <div class="c-info">
+              <span class="c-lbl">Location</span>
+              <span class="c-val">N. Nazimabad, Karachi</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">🐙</div>
+            <div class="c-info">
+              <span class="c-lbl">GitHub</span>
+              <span class="c-val"><a href="https://github.com/hashirykw">github.com/hashirykw</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="card">
+        <div class="section-label">Skills</div>
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">HTML5</span><span class="skill-pct">90%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">CSS3</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">JavaScript</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">Bootstrap</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">jQuery</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">Canva / Design</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-top"><span class="skill-name">Social Media Mktg</span><span class="skill-pct">65%</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="card">
+        <div class="section-label">Tools</div>
+        <div class="tools-wrap">
+          <span class="tool-chip">VS Code</span>
+          <span class="tool-chip">GitHub</span>
+          <span class="tool-chip">GitHub Pages</span>
+          <span class="tool-chip">Vercel</span>
+          <span class="tool-chip">Netlify</span>
+          <span class="tool-chip">Canva</span>
+          <span class="tool-chip">MS Excel</span>
+          <span class="tool-chip">MS Word</span>
+          <span class="tool-chip">PowerPoint</span>
+          <span class="tool-chip">SEO</span>
+          <span class="tool-chip">Python</span>
+          <span class="tool-chip">Flutter</span>
+          <span class="tool-chip">AI</span>
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="card">
+        <div class="section-label">Languages</div>
+        <div class="lang-list">
+          <div class="lang-item">
+            <span class="lang-name">Urdu</span>
+            <span class="lang-level">Native</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">English</span>
+            <span class="lang-level">Proficient</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── MAIN ── -->
+    <div class="main">
+
+      <!-- About -->
+      <div class="card">
+        <div class="section-label">About Me</div>
+        <p class="about-text">
+          Results-driven <strong>freelance web developer & graphic designer</strong> from Karachi with
+          <strong>51+ delivered websites</strong> and <strong>40+ satisfied clients</strong>.
+          Founder of <strong>MHW Web Solutions</strong> and Co-Founder of <strong>InfiniMind Academy</strong>,
+          specialising in responsive, high-performing websites using
+          <strong>HTML, CSS, JavaScript, Bootstrap & jQuery</strong>.
+          Currently completing <strong>A-Levels</strong> while expanding freelance impact —
+          99+ projects on the horizon, Inshallah.
+        </p>
+      </div>
+
+      <!-- Experience -->
+      <div class="card">
+        <div class="section-label">Experience</div>
+        <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-role">Founder & Freelance Web Developer</div>
+            <div class="exp-company">MHW Web Solutions · Self-Employed</div>
+            <div class="exp-desc">Delivered 51+ websites to 40+ clients across the fitness, business, and branding sectors. Built responsive, high-performing single-page and multi-page sites using HTML, CSS, JS, Bootstrap & jQuery. Deployed via GitHub Pages and Vercel.</div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-role">Co-Founder</div>
+            <div class="exp-company">InfiniMind Academy · Online AI & Coding Education</div>
+            <div class="exp-desc">Co-founded an online AI literacy and coding education platform for children in Grades 1–7, delivered via Zoom globally. Contributed to curriculum design, branding, and web presence.</div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-role">Graphic Designer & Social Media Marketer</div>
+            <div class="exp-company">PSMU — Online Signals Platform (Crypto · PSX · PMEX)</div>
+            <div class="exp-desc">Designed visual content and managed social media for a trading signals platform covering crypto, PSX, and PMEX markets.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div class="card">
+        <div class="section-label">Featured Projects</div>
+        <div class="proj-list">
+          <div class="proj-item">
+            <div class="proj-top">
+              <span class="proj-name">💪 Power Fitness Zone Gym</span>
+              <span class="proj-tag">Gym · Responsive UI</span>
+            </div>
+            <div class="proj-url"><a href="https://power-fitness-zone-gym.vercel.app" target="_blank">power-fitness-zone-gym.vercel.app</a></div>
+            <div class="proj-desc">Highly-ranked, responsive gym website with a modern UI. Built with HTML, CSS & JavaScript.</div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-top">
+              <span class="proj-name">🏋️ AA Fitness</span>
+              <span class="proj-tag">Fitness · Branding</span>
+            </div>
+            <div class="proj-url"><a href="https://aa-fitness-wine.vercel.app" target="_blank">aa-fitness-wine.vercel.app</a></div>
+            <div class="proj-desc">Top-ranked fitness site with strong branding and clean responsive layout.</div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-top">
+              <span class="proj-name">🧮 YKW Scientific Calculator</span>
+              <span class="proj-tag">Web App · Vercel</span>
+            </div>
+            <div class="proj-url"><a href="https://ykw-calculator.vercel.app" target="_blank">ykw-calculator.vercel.app</a></div>
+            <div class="proj-desc">A fully functional scientific calculator web app deployed on Vercel.</div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-top">
+              <span class="proj-name">🌐 MHW Company Website</span>
+              <span class="proj-tag">Business · Portfolio</span>
+            </div>
+            <div class="proj-url"><a href="https://github.com/hashirykw" target="_blank">github.com/hashirykw</a> · 51+ more projects</div>
+            <div class="proj-desc">Official business website for MHW Web Solutions. Full project portfolio available on GitHub.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="card">
+        <div class="section-label">Education</div>
+        <div class="edu-list">
+          <div class="edu-item">
+            <div class="edu-dot">🎓</div>
+            <div class="edu-info">
+              <div class="edu-level">A2 Level</div>
+              <div class="edu-place">Private Coaching, Karachi</div>
+              <span class="edu-status prog">In Progress</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot">📋</div>
+            <div class="edu-info">
+              <div class="edu-level">AS Level</div>
+              <div class="edu-place">Private Coaching, Karachi</div>
+              <span class="edu-status awaited">Result Awaited</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot">⭐</div>
+            <div class="edu-info">
+              <div class="edu-level">O Levels</div>
+              <div class="edu-place">Private Coaching, Karachi</div>
+              <span class="edu-status done">4 A Grades · 4 B Grades</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot">🤖</div>
+            <div class="edu-info">
+              <div class="edu-level">Python + AI & Flutter</div>
+              <div class="edu-place">Aptech Computer Education, Karachi</div>
+              <div class="edu-place" style="font-size:10px;margin-top:2px;color:var(--muted);">Python · Artificial Intelligence · Flutter</div>
+              <span class="edu-status prog">In Progress</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot">💻</div>
+            <div class="edu-info">
+              <div class="edu-level">1-Year Diploma — Web Development & Office</div>
+              <div class="edu-place">Aptech Computer Education, Karachi</div>
+              <div class="edu-place" style="font-size:10px;margin-top:2px;color:var(--muted);">HTML · CSS · Bootstrap · JavaScript · jQuery · SEO · Excel · PowerPoint · Word</div>
+              <span class="edu-status done">Completed</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-dot">🏫</div>
+            <div class="edu-info">
+              <div class="edu-level">Primary — Grades 1–8</div>
+              <div class="edu-place">Karachi Public School</div>
+              <span class="edu-status done">Completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certification -->
+      <div class="card">
+        <div class="section-label">Certifications</div>
+        <div class="cert-item">
+          <div class="cert-icon">🏅</div>
+          <div class="cert-info">
+            <div class="cert-name">HTML, CSS & JavaScript — Certification Course for Beginners</div>
+            <div class="cert-by">Udemy · YouAccel Training</div>
+            <div class="cert-date">April 2025</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="cv-footer">
+    <div class="footer-left">
+      <div class="footer-logo">
+        <svg width="28" height="16" viewBox="0 0 88 44" fill="none">
+          <path d="M44 22 C44 12 54 4 66 4 C78 4 88 12 88 22 C88 32 78 40 66 40 C54 40 44 32 44 22 Z" stroke="url(#fg1)" stroke-width="5" fill="none"/>
+          <path d="M44 22 C44 32 34 40 22 40 C10 40 0 32 0 22 C0 12 10 4 22 4 C34 4 44 12 44 22 Z" stroke="url(#fg2)" stroke-width="5" fill="none"/>
+          <defs>
+            <linearGradient id="fg1" x1="44" y1="4" x2="88" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#6EE7F7"/><stop offset="1" stop-color="#A78BFA"/></linearGradient>
+            <linearGradient id="fg2" x1="0" y1="40" x2="44" y2="4" gradientUnits="userSpaceOnUse"><stop stop-color="#A78BFA"/><stop offset="1" stop-color="#6EE7F7"/></linearGradient>
+          </defs>
+        </svg>
+        <span class="footer-name">Muhammad Hashir</span>
+      </div>
+    </div>
+    <div class="footer-right">
+      muhammadhashir1062009@gmail.com &nbsp;·&nbsp; github.com/hashirykw &nbsp;·&nbsp; Karachi, PK
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
